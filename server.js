@@ -24,12 +24,15 @@ app.post('/proxy/claude', async (req, res) => {
       return res.status(400).json({ error: 'Claude API key is required' });
     }
     
+    // Log the request body for debugging
+    console.log('Request to Claude API:', JSON.stringify(req.body));
+    
     const response = await axios({
       method: 'post',
       url: 'https://api.anthropic.com/v1/messages',
       headers: {
         'Content-Type': 'application/json',
-        'anthropic-version': '2024-01-01',
+        'anthropic-version': '2023-06-01', // Updated version
         'x-api-key': claudeKey
       },
       data: req.body
